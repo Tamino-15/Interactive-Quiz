@@ -6,18 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive-Quiz</title>
     <link rel="stylesheet" href="quiz.css">
+    <script src="quiz.js" defer></script>
 </head>
 
 <body>
     <div class="header">
         Interactive-Quiz
     </div>
+
+    <div id="tracker"></div>
+    
     <button type="submit" class="startquiz" onclick="loadQuestions()">Start Quiz</button>
 
     <div class="question" id="question"></div>
     <div class="answers" id="answers"></div>
 
-    <script src="quiz.js" defer></script>
+    
 </body>
 
 </html>

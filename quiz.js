@@ -45,7 +45,18 @@ const Questions = [{
 // globals variables
 let currentQuestion = 0;
 let score = 0;
-const totalQuestions = Questions.length();
+const totalQuestions = Questions.length;
+const trackerID = document.getElementById('tracker');
+
+//function to display the score
+function trackScore(){
+    htmlCode="";
+    htmlCode += `
+        <div class="Score"> Score: ${score} </div>
+        <div class="round"> ${currentQuestion} of ${totalQuestions} </div>
+    `;
+    trackerID.innerHTML=htmlCode;
+}
 
 // ======================= loading and display the question = =======================
 function loadQuestions() {
@@ -54,6 +65,8 @@ function loadQuestions() {
 
     question.textContent = Questions[currentQuestion].q;
     answers.innerHTML = "";
+
+    trackScore();
 
     // loop for create every answer option to 1 question
     for (let i = 0; i < Questions[currentQuestion].a.length; i++) {
@@ -72,3 +85,4 @@ function loadQuestions() {
         answers.appendChild(div);
     }
 }
+
