@@ -45,10 +45,14 @@ const Questions = [{
 // globals variables
 let currentQuestion = 0;
 let score = 0;
-const totalQuestions = Questions.length();
+const totalQuestions = Questions.length;
 
 // ======================= loading and display the question = =======================
 function loadQuestions() {
+
+    // change the display value of button start quizz
+    document.getElementById("startBtn").style.display = 'none';
+
     const question = document.getElementById("question");
     const answers = document.getElementById("answers");
 
