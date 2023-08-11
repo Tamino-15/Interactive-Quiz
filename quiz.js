@@ -60,6 +60,10 @@ function trackScore(){
 
 // ======================= loading and display the question = =======================
 function loadQuestions() {
+
+    // change the display value of button start quizz
+    document.getElementById("startBtn").style.display = 'none';
+
     const question = document.getElementById("question");
     const answers = document.getElementById("answers");
 
