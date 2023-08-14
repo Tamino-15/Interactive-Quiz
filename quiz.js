@@ -47,7 +47,7 @@ let currentQuestion = 0;
 let score = 0;
 const totalQuestions = Questions.length;
 
-// ======================= loading and display the question = =======================
+// ======================= loading and display the question ========================
 function loadQuestions() {
 
     // change the display value of button start quizz
