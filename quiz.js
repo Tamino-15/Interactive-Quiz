@@ -1,4 +1,4 @@
-// Questions array
+//  ================================= Questions array =================================
 const Questions = [{
     q: "What is capital of France?",
     a: [{ text: "Toulouse", isCorrect: false },
@@ -42,21 +42,67 @@ const Questions = [{
 ]
 
 
-// globals variables
-let currentQuestion = 0;
+
+// ======================= globals variables =======================
+let currentQuestion = 1;
 let score = 0;
 const totalQuestions = Questions.length;
 const trackerID = document.getElementById('tracker');
 
-//function to display the score
-function trackScore(){
-    htmlCode="";
+
+
+// function to display the score
+function trackScore() {
+    htmlCode = "";
     htmlCode += `
         <div class="Score"> Score: ${score} </div>
         <div class="round"> ${currentQuestion} of ${totalQuestions} </div>
     `;
-    trackerID.innerHTML=htmlCode;
+    trackerID.innerHTML = htmlCode;
 }
+
+
+// function to go to the next question
+function displayNextQuestion() {
+    clearFeedBack();
+
+    if (currentQuestion < Questions.length - 1) {
+        currentQuestion++;
+        loadQuestions();
+    } else {
+        document.getElementById("answers").remove()
+        document.getElementById("question").remove()
+    }
+}
+
+// disable radio button after timer end
+function switchOffRadioButton() {
+    var radio = document.getElementsByName("answers");
+    var len = radio.length;
+
+    for (var i = 0; i < len; i++) {
+        radio[i].disabled = true;
+    }
+}
+
+// function to display timer
+function timer() {
+    var timeLeft = 5; // TODO reset to 30
+    const elem = document.getElementById('timer');
+
+    var downloadTimer = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(downloadTimer);
+            elem.innerHTML = "Finished";
+            switchOffRadioButton();
+            checkAnswer();
+        } else {
+            elem.innerHTML = timeLeft + " seconds remaining";
+        }
+        timeLeft -= 1;
+    }, 1000);
+}
+
 
 // ======================= loading and display the question ========================
 function loadQuestions() {
@@ -88,5 +134,44 @@ function loadQuestions() {
         div.appendChild(choiceLabel);
         answers.appendChild(div);
     }
+
+    timer();
 }
 
+// function to check the answer
+function checkAnswer() {
+    const selectedAns = parseInt(document.querySelector('input[name="answers"]:checked').value);
+
+    // check if user selected an answer
+    if (selectedAns != null) {
+        if (Questions[currentQuestion].a[selectedAns].isCorrect) {
+            score++;
+            displayFeedback("Well done ! That's the correct answer !")
+        } else {
+            displayFeedback("Too bad it's not the right answer !")
+        }
+    }
+    else {
+        displayFeedback("You didn't selected an answer !!!")
+    }
+
+    trackScore();
+
+    // display the button for next question
+    document.getElementById("nextQButton").style.display = "block";
+}
+
+// display feedback
+function displayFeedback(sentences) {
+    const question = document.getElementById("feedback");
+    const feedbackLabel = document.createElement("label");
+
+    feedbackLabel.textContent = sentences;
+    feedbackLabel.id = "feedbackLabel"
+    question.appendChild(feedbackLabel);
+}
+
+function clearFeedBack() {
+    const feedback = document.getElementById("feedbackLabel")
+    feedback.textContent = "";
+}
