@@ -1,17 +1,22 @@
 body{
-    height: 80vh;
+    height: 100vh;
     margin: 0;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+    background-repeat: none;
+    font-family: 'Contrail One' cursive;
+    font-family: 'Rubik', sans-serif;
 
 }
 .header{
     text-align: center;
     font-size: clamp(2rem, 10vh, 4rem);
-    margin-bottom: 15vh;
-    text-decoration: underline;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    text-decoration:underline;
+    color: rgb(255, 123, 0);
 }
 .startquiz{
     height: 7vh;
@@ -21,4 +26,12 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: rgb(255, 123, 0);
+    border: rgb(255, 123, 0);
+    border-radius: 7.5px;
+}
+.startquiz:hover{
+    cursor: grab;
+    background-color: rgb(212, 113, 21);
+    border: rgb(212, 113, 21);
 }
