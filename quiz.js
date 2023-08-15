@@ -56,8 +56,8 @@ const trackerID = document.getElementById('tracker');
 function trackScore() {
     htmlCode = "";
     htmlCode += `
-        <div class="Score"> Score: ${score} </div>
-        <div class="round" id="round"> ${currentQuestion +1} of ${totalQuestions} </div>
+        <div class="Score"> Score : ${score} </div>
+        <div class="round" id="round"> ${currentQuestion + 1} / ${totalQuestions} </div>
     `;
     trackerID.innerHTML = htmlCode;
 }
@@ -65,13 +65,17 @@ function trackScore() {
 
 // function to go to the next question
 function displayNextQuestion() {
+    // clear all previous feedback messages
     clearFeedBack();
+
+    // disable button while timer isn't end
+    document.getElementById("nextQButton").style.display = "none";
 
     // load the next question
     if (currentQuestion < totalQuestions - 1) {
         currentQuestion++;
         loadQuestions();
-    // remove all unnecessary elements when game is over
+        // remove all unnecessary elements when game is over
     } else {
         document.getElementById("answers").remove()
         document.getElementById("question").remove()
@@ -162,19 +166,24 @@ function loadQuestions() {
 
 // function to check the answer
 function checkAnswer() {
+
+    var rightAnswer = "rightAnswer";
+    var badAnswer = "badAnswer";
+
     // check if the user has selected an answer
     try {
         const selectedAns = parseInt(document.querySelector('input[name="answers"]:checked').value);
 
         if (Questions[currentQuestion].a[selectedAns].isCorrect) {
             score++;
-            displayFeedback("Well done ! That's the correct answer !")
+
+            displayFeedback("Well done ! That's the correct answer !", rightAnswer)
         } else {
-            displayFeedback("Too bad it's not the right answer !")
+            displayFeedback("Too bad it's not the right answer !", badAnswer)
         }
     }
-    catch(error) {
-        displayFeedback("You didn't selected an answer !!!")
+    catch (error) {
+        displayFeedback("You didn't selected an answer !!!", badAnswer)
     }
 
     trackScore();
@@ -184,12 +193,17 @@ function checkAnswer() {
 }
 
 // display feedback
-function displayFeedback(sentences) {
+function displayFeedback(sentences, colorClass) {
     const feedbackLabel = document.getElementById("feedbackLabel");
+    const classes = colorClass;
     feedbackLabel.innerHTML = sentences;
+    feedbackLabel.classList.add(classes);
 }
 
 function clearFeedBack() {
     const feedback = document.getElementById("feedbackLabel")
+    // clear text
     feedback.innerHTML = "";
+    // clear class
+    feedback.classList.remove("rightAnswer", "badAnswer");
 }

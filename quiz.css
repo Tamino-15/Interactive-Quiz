@@ -15,7 +15,7 @@ body {
     text-align: center;
     font-size: clamp(2rem, 10vh, 4rem);
     margin-top: 20vh;
-    margin-bottom: 20vh;
+    margin-bottom: 14vh;
     text-decoration: underline;
     color: rgb(255, 123, 0);
 }
@@ -34,6 +34,90 @@ body {
 }
 
 .startquiz:hover {
+    cursor: grab;
+    background-color: rgb(212, 113, 21);
+    border: rgb(212, 113, 21);
+}
+
+.Score {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    ;
+}
+
+.round {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 200;
+    font-size: 25px;
+}
+
+.question {
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.answers {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: 200;
+    margin-bottom: 50px;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 200;
+    font-size: 30px;
+    margin-bottom: 22px;
+}
+
+.feedback {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.badAnswer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 33px;
+    letter-spacing: 1.5px;
+    color: red;
+}
+
+.rightAnswer {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 33px;
+    letter-spacing: 1.5px;
+    color: rgb(140, 224, 13);
+}
+
+#nextQButton {
+    height: 7vh;
+    width: 20vh;
+    font-size: clamp(1rem, 5vh, 2rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(255, 123, 0);
+    border: rgb(255, 123, 0);
+    border-radius: 7.5px;
+}
+
+#nextQButton:hover {
     cursor: grab;
     background-color: rgb(212, 113, 21);
     border: rgb(212, 113, 21);
