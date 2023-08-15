@@ -98,7 +98,7 @@ function switchOffRadioButton() {
 
 // function to display timer
 function timer() {
-    var timeLeft = 2; // TODO reset to 30
+    var timeLeft = 30;
 
     const elem = document.getElementById('timer');
 
@@ -112,7 +112,7 @@ function timer() {
                 // display the message when game is over
                 elem.innerHTML = "Finished";
 
-                // change text of the next button
+                // change text of the button : NEXT => RESULT
                 document.getElementById("nextQButton").innerHTML = "RESULT";
 
             }
