@@ -44,8 +44,9 @@ const Questions = [{
 
 
 // ======================= globals variables =======================
-let currentQuestion = 1;
+let currentQuestion = 0;
 let score = 0;
+let count = 0;
 const totalQuestions = Questions.length;
 const trackerID = document.getElementById('tracker');
 
@@ -56,7 +57,7 @@ function trackScore() {
     htmlCode = "";
     htmlCode += `
         <div class="Score"> Score: ${score} </div>
-        <div class="round"> ${currentQuestion} of ${totalQuestions} </div>
+        <div class="round" id="round"> ${currentQuestion +1} of ${totalQuestions} </div>
     `;
     trackerID.innerHTML = htmlCode;
 }
@@ -66,12 +67,18 @@ function trackScore() {
 function displayNextQuestion() {
     clearFeedBack();
 
-    if (currentQuestion < Questions.length - 1) {
+    // load the next question
+    if (currentQuestion < totalQuestions - 1) {
         currentQuestion++;
         loadQuestions();
+    // remove all unnecessary elements when game is over
     } else {
         document.getElementById("answers").remove()
         document.getElementById("question").remove()
+        document.getElementById("timer").remove()
+        document.getElementById("feedback").remove()
+        document.getElementById("nextQButton").remove()
+        document.getElementById("round").remove()
     }
 }
 
@@ -87,13 +94,28 @@ function switchOffRadioButton() {
 
 // function to display timer
 function timer() {
-    var timeLeft = 5; // TODO reset to 30
+    var timeLeft = 2; // TODO reset to 30
+
     const elem = document.getElementById('timer');
 
     var downloadTimer = setInterval(function () {
         if (timeLeft <= 0) {
             clearInterval(downloadTimer);
-            elem.innerHTML = "Finished";
+
+            // increase counter to determinate when it's the last question
+            count++;
+            if (count === totalQuestions) {
+                // display the message when game is over
+                elem.innerHTML = "Finished";
+
+                // change text of the next button
+                document.getElementById("nextQButton").innerHTML = "RESULT";
+
+            }
+            else {
+                elem.innerHTML = "Time elapsed !";
+            }
+
             switchOffRadioButton();
             checkAnswer();
         } else {
@@ -140,10 +162,10 @@ function loadQuestions() {
 
 // function to check the answer
 function checkAnswer() {
-    const selectedAns = parseInt(document.querySelector('input[name="answers"]:checked').value);
+    // check if the user has selected an answer
+    try {
+        const selectedAns = parseInt(document.querySelector('input[name="answers"]:checked').value);
 
-    // check if user selected an answer
-    if (selectedAns != null) {
         if (Questions[currentQuestion].a[selectedAns].isCorrect) {
             score++;
             displayFeedback("Well done ! That's the correct answer !")
@@ -151,7 +173,7 @@ function checkAnswer() {
             displayFeedback("Too bad it's not the right answer !")
         }
     }
-    else {
+    catch(error) {
         displayFeedback("You didn't selected an answer !!!")
     }
 
@@ -163,15 +185,11 @@ function checkAnswer() {
 
 // display feedback
 function displayFeedback(sentences) {
-    const question = document.getElementById("feedback");
-    const feedbackLabel = document.createElement("label");
-
-    feedbackLabel.textContent = sentences;
-    feedbackLabel.id = "feedbackLabel"
-    question.appendChild(feedbackLabel);
+    const feedbackLabel = document.getElementById("feedbackLabel");
+    feedbackLabel.innerHTML = sentences;
 }
 
 function clearFeedBack() {
     const feedback = document.getElementById("feedbackLabel")
-    feedback.textContent = "";
+    feedback.innerHTML = "";
 }
