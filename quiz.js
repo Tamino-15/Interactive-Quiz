@@ -77,12 +77,46 @@ function displayNextQuestion() {
         loadQuestions();
         // remove all unnecessary elements when game is over
     } else {
+        document.getElementById("tracker").remove()
         document.getElementById("answers").remove()
         document.getElementById("question").remove()
         document.getElementById("timer").remove()
         document.getElementById("feedback").remove()
         document.getElementById("nextQButton").remove()
-        document.getElementById("round").remove()
+
+        var imageSrc = "";
+        var feedBackMsg = "";
+
+        if (score == 5) {
+            imageSrc = "AllGood.jpg";
+            feedBackMsg = "Your are amazing !";
+        }
+
+        if (score < 5 && score >= 3) {
+            imageSrc = "wellDone.jpg";
+            feedBackMsg = "Not bad ! But you can do better !";
+        }
+        else {
+            imageSrc = "tryAgain.webp";
+            feedBackMsg = "Oh Sorry but you need to improve yourself !";
+        }
+
+
+        const li = document.createElement('div');
+        li.innerHTML =
+            `<div class="responsive_container">
+            <div class="cards_item">
+                <div class="card">
+                    <div><img src="${imageSrc}" alt="congratulation"></div>
+                    <div class="card_content">
+                        <h2 class="card_title">Your score is ${score}</h2>
+                        <p class="card_text">Congratulations !!!</p>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        document.body.append(li);
     }
 }
 
@@ -98,7 +132,7 @@ function switchOffRadioButton() {
 
 // function to display timer
 function timer() {
-    var timeLeft = 30;
+    var timeLeft = 20;
 
     const elem = document.getElementById('timer');
 
