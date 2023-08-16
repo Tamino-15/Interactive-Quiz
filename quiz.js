@@ -91,8 +91,7 @@ function displayNextQuestion() {
             imageSrc = "AllGood.jpg";
             feedBackMsg = "Your are amazing !";
         }
-
-        if (score < 5 && score >= 3) {
+        else if (score < 5 && score >= 3) {
             imageSrc = "wellDone.jpg";
             feedBackMsg = "Not bad ! But you can do better !";
         }
@@ -110,7 +109,7 @@ function displayNextQuestion() {
                     <div><img src="${imageSrc}" alt="congratulation"></div>
                     <div class="card_content">
                         <h2 class="card_title">Your score is ${score}</h2>
-                        <p class="card_text">Congratulations !!!</p>
+                        <p class="card_text">${feedBackMsg}</p>
                     </div>
                 </div>
             </div>
@@ -132,7 +131,7 @@ function switchOffRadioButton() {
 
 // function to display timer
 function timer() {
-    var timeLeft = 20;
+    var timeLeft = 15;
 
     const elem = document.getElementById('timer');
 
