@@ -84,26 +84,32 @@ function displayNextQuestion() {
         document.getElementById("feedback").remove()
         document.getElementById("nextQButton").remove()
 
-        var imageSrc = "";
-        var feedBackMsg = "";
+        displayFeedBackMsgFinish();
+    }
+}
 
-        if (score == 5) {
-            imageSrc = "AllGood.jpg";
-            feedBackMsg = "Your are amazing !";
-        }
-        else if (score < 5 && score >= 3) {
-            imageSrc = "wellDone.jpg";
-            feedBackMsg = "Not bad ! But you can do better !";
-        }
-        else {
-            imageSrc = "tryAgain.webp";
-            feedBackMsg = "Oh Sorry but you need to improve yourself !";
-        }
+// display feedbackmsg
+function displayFeedBackMsgFinish() {
+    var imageSrc = "";
+    var feedBackMsg = "";
+
+    if (score == 5) {
+        imageSrc = "AllGood.jpg";
+        feedBackMsg = "Your are amazing !";
+    }
+    else if (score < 5 && score >= 3) {
+        imageSrc = "wellDone.jpg";
+        feedBackMsg = "Not bad ! But you can do better !";
+    }
+    else {
+        imageSrc = "tryAgain.webp";
+        feedBackMsg = "Oh Sorry but you need to improve yourself !";
+    }
 
 
-        const li = document.createElement('div');
-        li.innerHTML =
-            `<div class="responsive_container">
+    const li = document.createElement('div');
+    li.innerHTML =
+        `<div class="responsive_container">
             <div class="cards_item">
                 <div class="card">
                     <div><img src="${imageSrc}" alt="congratulation"></div>
@@ -115,8 +121,7 @@ function displayNextQuestion() {
             </div>
         </div>`;
 
-        document.body.append(li);
-    }
+    document.body.append(li);
 }
 
 // disable radio button after timer end
